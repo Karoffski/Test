@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #10d2ff;
+    text-align: center;
+}
+
+h1 {
+    font-size: 75px;
+    font-weight: 400;
+}
+
+#input {
+    padding: 10px 30px;
+    margin-right: 15px;
+    border-radius: 2px;
+    border: none;
+    font-size: 16px;
+    text-align: left;
+}
+
+#submit { 
+    background-color: #006eff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+#weekDay {
+    font-size: 48px;
+}
