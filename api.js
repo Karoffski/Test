@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var input = document.getElementById("input").value;
       console.log(input)
 
+      days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
       const API_KEY = 'f5795e01c3854f0886691ec5e3ce8fa1'
       let URL = `https://api.opencagedata.com/geocode/v1/json?q=${input}&key=${API_KEY}&language=fr&pretty=1`
 
@@ -19,14 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
       else console.log(`Erreur lorsqu'on a tenté de récupérer les data`);
     })
     .then(data => {
+      // Store longitude and latitude in variables
       lat = data.results[0].geometry.lat
       lon = data.results[0].geometry.lng
-      console.log(lat)
-      console.log(lon)
 
+      // Concatenation of the url 
       const KEY_API = 'd0af24aa55087a237520c27ee51f1503'
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${KEY_API}`
-      
+
       fetch(url)
       .then(response => { 
         if (response.status == 200) { // on vérifier que l'appel à l'API a fonctionné
@@ -34,8 +36,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }else console.log(`Erreur lorsqu'on a tenté de récupérer les data`);
       })
       .then(data => {
+        console.log(data)
+        // Take cloud % / weather of the day / day of the week
+        const birthday = new Date();
+        const day = birthday.getDay();
+        console.log(day)
         currentWeather = data.current.weather[0].main
-        return document.getElementById("weekDay").innerHTML = currentWeather
+        clouds = data.current.clouds
+
+        for (let i = day; i < days.length; i++) {
+          let p = document.createElement('p')
+          p.innerHTML = days[i]
+          let empty = document.getElementById("empty")
+          empty.appendChild(p)
+
+          let img = document.createElement('img').setAttribute("id", "image")
+          document.getElementById("image").src = "./icons/sun.svg"
+          empty.appendChild(img)
+          
+         // if(currentWeather == 'Clear') {
+          
+          // document.getElementById("weatherPic").src = './icons/sun.svg'
+        //  }else if(currentWeather == 'Snow') {
+        //   document.getElementById("weatherPic").src = './icons/snow.svg'
+        //  }else if(currentWeather == 'Clouds' && clouds >= 0) {
+        //   document.getElementById("weatherPic").src = './icons/cloudy.svg' 
+        //  }else if(currentWeather == 'Clouds' && clouds < 50) {
+        //   document.getElementById("weatherPic").src = './icons/clouds.svg'
+        //  }else 
+        //   document.getElementById("weatherPic").src = './icons/rain.svg'
+         
+         
+
+          // Conditions for picture
+    }
+        
+        
+
+        
       })
       .catch(err => {
         console.log(err)
