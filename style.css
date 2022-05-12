@@ -38,6 +38,12 @@ h1 {
     justify-content: space-evenly;
 }
 
+#empty2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 img {
     height: 100px;
     width: 100px;
@@ -46,4 +52,10 @@ img {
 p {
     font-size: 32px;
     margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    margin-right: 15px;
+    font-size: 13px;
 }
