@@ -63,7 +63,7 @@ function fetchWeather(position) {
 
 }
 
-function fetchPositionAndWeather() {
+function fetchPositionAndWeather() {   
   // Get location and number of days from user
   var input = document.getElementById("input").value;
 
