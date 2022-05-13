@@ -5,9 +5,10 @@ function fetchWeather(position) {
   
   // Get number of days from user
   var nbrDays = parseInt(document.getElementById("nbrDays").value);
- // Concatenation of the url 
- const KEY_API = 'd0af24aa55087a237520c27ee51f1503'
- let urlWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.lat}&lon=${position.lng}&appid=${KEY_API}`
+
+  // Concatenation of the url 
+  const KEY_API = 'd0af24aa55087a237520c27ee51f1503'
+  let urlWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.lat}&lon=${position.lng}&appid=${KEY_API}`
 
    fetch(urlWeather)// on utilise la methode fetch à nouveau
    .then(response => { 
@@ -16,23 +17,36 @@ function fetchWeather(position) {
      }else console.log(`Erreur lorsqu'on a tenté de récupérer les data`);
    }) 
      .then(data => {
+
        // Obtain UV index in order to modify the background color
        let uvi = data.current.uvi
+
        if (uvi <= 0) {
-         document.body.style.background = "#00004b"
+        document.body.style.background = "linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 100%)"
+        document.body.style.backgroundRepeat = "no-repeat"
+        document.body.style.backgroundAttachment = "fixed"
+        document.getElementById("title").style.color = "white"  
+        document.getElementById("empty").style.color = "white"
+        document.getElementById("empty2").style.WebkitFilter = "invert(1)"
+        document.getElementById("empty2").style.filter = "invert(1)"
        }else {
          document.body.style.background = "#23d7e2"
+         document.getElementById("title").style.color = "black"  
+         document.getElementById("empty").style.color = "black"
+         document.getElementById("empty2").style.WebkitFilter = "invert(0)"
+         document.getElementById("empty2").style.filter = "invert(0)"
        }
        // Obtain current day from 0 to 6 -> Sunday to Saturday
-       const birthday = new Date();
-       const today = birthday.getDay();
-       let endToday = today + nbrDays
-      // Clear previous results
-      empty.innerHTML = "";
-      empty2.innerHTML = "";
-         // Create day and list them
+        const birthday = new Date();
+        const today = birthday.getDay();
+        let endToday = today + nbrDays
+
+        // Clear previous results
+        empty.innerHTML = "";
+        empty2.innerHTML = "";
+
+        // Create day and list them
          for (let i = today; i < endToday; i++) {
-           
            let empty = document.getElementById("empty")
            let p = document.createElement('p')
            p.innerHTML = days[i]
@@ -41,12 +55,12 @@ function fetchWeather(position) {
 
          // Create pictures with corresponding weather
          for(let j = 0; j < nbrDays; j++) {
-           
+
            let clouds = data.daily[j].clouds
            let currentWeather = data.daily[j].weather[0].main
            let empty2 = document.getElementById("empty2")
-           let img = document.createElement('img')          
-           
+           let img = document.createElement('img') 
+
            // Filtering with conditions to match picture with weather
            if(currentWeather == 'Clear') {
              img.src = "./icons/sun.svg"
@@ -72,9 +86,9 @@ function fetchWeather(position) {
 }
 
 function fetchPositionAndWeather() {   
+
   // Get location and number of days from user
   var input = document.getElementById("input").value;
-
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   
   // Concatenation of the url 
