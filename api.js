@@ -16,12 +16,20 @@ function fetchWeather(position) {
      }else console.log(`Erreur lorsqu'on a tenté de récupérer les data`);
    }) 
      .then(data => {
-       console.log(data);
+       // Obtain UV index in order to modify the background color
+       let uvi = data.current.uvi
+       if (uvi <= 0) {
+         document.body.style.background = "#00004b"
+       }else {
+         document.body.style.background = "#23d7e2"
+       }
        // Obtain current day from 0 to 6 -> Sunday to Saturday
        const birthday = new Date();
        const today = birthday.getDay();
-      console.log(today);
+
       let endToday = today + nbrDays
+      empty.innerHTML = "";
+      empty2.innerHTML = "";
          // Create day and list them
          for (let i = today; i < endToday; i++) {
            
