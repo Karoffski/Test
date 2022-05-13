@@ -26,8 +26,8 @@ function fetchWeather(position) {
        // Obtain current day from 0 to 6 -> Sunday to Saturday
        const birthday = new Date();
        const today = birthday.getDay();
-
-      let endToday = today + nbrDays
+       let endToday = today + nbrDays
+      // Clear previous results
       empty.innerHTML = "";
       empty2.innerHTML = "";
          // Create day and list them
@@ -89,7 +89,6 @@ function fetchPositionAndWeather() {
     else console.log(`Erreur lorsqu'on a tenté de récupérer les data`);
   })
   .then(data => {
-    console.log(data)
     return data.results[0].geometry
   })
   .then(data => {
